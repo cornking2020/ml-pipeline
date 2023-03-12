@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+go install sigs.k8s.io/kind@latest
+
 cat <<EOF | kind create cluster --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4

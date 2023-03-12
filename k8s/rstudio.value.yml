@@ -1,4 +1,8 @@
 ingress:
   enabled: true
   hosts:
-    - posit.ms.home
+    - host: posit.ms.home
+      paths:
+        - "/"
+readinessProbe:
+  enabled: false

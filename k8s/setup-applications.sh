@@ -7,7 +7,15 @@ helm upgrade --cleanup-on-fail \
   --create-namespace \
   -f airflow.value.yml
 
-microk8s kubectl config set-context --current --namespace=airflow
+#Default Webserver (Airflow UI) Login credentials:
+#    username: admin
+#    password: admin
+#Default Postgres connection credentials:
+#    username: postgres
+#    password: postgres
+#    port: 5432
+
+kubectl config set-context --current --namespace=airflow
 
 helm repo add jupyterhub https://jupyterhub.github.io/helm-chart/
 
@@ -17,9 +25,15 @@ helm upgrade --cleanup-on-fail \
   --create-namespace \
   --values jupyter.value.yml
 
+kubectl config set-context --current --namespace=jupyterhub
+#    username: admin
+#    password: admin
+
 helm repo add rstudio https://helm.rstudio.com
-helm upgrade  --cleanup-on-fail \
+helm upgrade --cleanup-on-fail \
   --install rstudio rstudio/rstudio-workbench \
   --namespace rstudio \
   --create-namespace \
   --values rstudio.value.yml
+
+kubectl config set-context --current --namespace=rstudio
