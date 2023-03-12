@@ -1,0 +1,5 @@
+ingress:
+  web:
+    enabled: true
+    hosts:
+      - airflow.ms.home
