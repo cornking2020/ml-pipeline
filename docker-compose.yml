@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  airflow:
+    build:
+      context: airflow
+    image: "cornking2020/airflow:latest"
+    # volumes:
+    #   - "./airflow/:/airflow/dags/"
+    ports:
+      - "8080:8080"
