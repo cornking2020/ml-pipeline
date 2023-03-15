@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jupyterhub
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: jupyterhub
+    repoURL: https://jupyterhub.github.io/helm-chart/
+    targetRevision: 2.0.0
+    helm:
+      releaseName: jupyterhub
+      values: |
+        ingress:
+          enabled: true
+          hosts:
+            - jupyterhub.127.0.0.1.nip.io
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: jupyterhub
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

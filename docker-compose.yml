@@ -3,7 +3,7 @@ version: '3'
 services:
   airflow:
     build:
-      context: airflow
+      context: dags
     image: "cornking2020/airflow:latest"
     # volumes:
     #   - "./airflow/:/airflow/dags/"

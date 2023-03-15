@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: airflow
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: airflow
+    repoURL: https://airflow.apache.org
+    targetRevision: 1.8.0
+    helm:
+      releaseName: airflow
+      values: |
+        ingress:
+          web:
+            enabled: true
+            hosts:
+              - airflow.127.0.0.1.nip.io
+        dags:
+          gitSync:
+            enabled: true
+            repo: git@github.com:cornking2020/ml-pipeline.git
+            branch: feature/beta
+            subPath: "dags"
+        redis:
+          password: secret
+        createUserJob:
+          useHelmHooks: false
+          applyCustomEnv: false
+        migrateDatabaseJob:
+          useHelmHooks: false
+          applyCustomEnv: false
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: airflow
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

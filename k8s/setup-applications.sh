@@ -37,3 +37,7 @@ helm upgrade --cleanup-on-fail \
   --values rstudio.value.yml
 
 kubectl config set-context --current --namespace=rstudio
+
+kubectl create namespace argocd
+kubectl config set-context --current --namespace=argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
