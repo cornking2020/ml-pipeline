@@ -13,16 +13,39 @@ spec:
       releaseName: airflow
       values: |
         ingress:
+          flower:
+            enabled: true
+            hosts:
+              - flower.127.0.0.1.nip.io
           web:
             enabled: true
             hosts:
               - airflow.127.0.0.1.nip.io
+        executor: KubernetesExecutor
+        fernetKey: 7T512UXSSmBOkpWimFHIVb8jK6lfmSAvx4mO6Arehnc=
+        webserverSecretKey: secret
+        users:
+          - username: admin
+            password: admin
+            role: Administrator
+            email: admin@example.com
+            firstName: admin
+            lastName: admin
+        flower:
+          enabled: false
         dags:
           gitSync:
             enabled: true
             repo: https://github.com/cornking2020/ml-pipeline.git
             branch: feature/beta
             subPath: "dags"
+            resources:
+              limits:
+                cpu: 200m
+                memory: 256Mi
+              requests:
+                cpu: 100m
+                memory: 128Mi
         redis:
           password: secret
         createUserJob:
@@ -31,10 +54,18 @@ spec:
         migrateDatabaseJob:
           useHelmHooks: false
           applyCustomEnv: false
+        workers:
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
   destination:
     server: "https://kubernetes.default.svc"
     namespace: airflow
   syncPolicy:
-    automated: {}
+    automated: { }
     syncOptions:
       - CreateNamespace=true
