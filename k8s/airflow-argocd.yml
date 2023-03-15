@@ -20,7 +20,7 @@ spec:
         dags:
           gitSync:
             enabled: true
-            repo: git@github.com:cornking2020/ml-pipeline.git
+            repo: https://github.com/cornking2020/ml-pipeline.git
             branch: feature/beta
             subPath: "dags"
         redis:
@@ -35,5 +35,6 @@ spec:
     server: "https://kubernetes.default.svc"
     namespace: airflow
   syncPolicy:
+    automated: {}
     syncOptions:
       - CreateNamespace=true
