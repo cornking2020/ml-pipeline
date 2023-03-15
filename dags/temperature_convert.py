@@ -1,4 +1,5 @@
 import json
+from typing import Dict
 
 import pendulum
 import requests
@@ -20,15 +21,15 @@ def etl():
         return response_data["data"]
 
     @task()
-    def to_fahrenheit(temps: dict[int, float]) -> dict[int, float]:
-        ret: dict[int, float] = {}
+    def to_fahrenheit(temps: Dict[int, float]) -> Dict[int, float]:
+        ret: Dict[int, float] = {}
         for year, celsius in temps.items():
             ret[year] = float(celsius) * 1.8 + 32
 
         return ret
 
     @task()
-    def load(fahrenheit: dict[int, float]) -> Dataset:
+    def load(fahrenheit: Dict[int, float]) -> Dataset:
         filename = "/tmp/fahrenheit.json"
         s = json.dumps(fahrenheit)
         f = open(filename, "w")
