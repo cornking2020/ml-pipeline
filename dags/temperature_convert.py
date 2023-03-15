@@ -11,7 +11,7 @@ SRC = Dataset(
 now = pendulum.now()
 
 
-@dag(start_date=now, schedule="None", catchup=False)
+@dag(start_date=now, schedule=None, catchup=False)
 def etl():
     @task()
     def retrieve(src: Dataset) -> dict:
@@ -38,8 +38,8 @@ def etl():
         return Dataset(f"file:///{filename}")
 
     data = retrieve(SRC)
-    fahrenheit = to_fahrenheit(data)
-    load(fahrenheit)
+    temperature = to_fahrenheit(data)
+    load(temperature)
 
 
 etl()
