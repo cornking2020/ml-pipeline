@@ -1,0 +1,11 @@
+overwrite: true
+schema: "http://127.0.0.1:9090/graphql"
+documents: "graphql/*.graphql"
+generates:
+  store/GraphqlSlice.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-rtk-query:
+          importBaseApiFrom: './api'
+          exportHooks: true

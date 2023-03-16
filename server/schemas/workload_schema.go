@@ -31,7 +31,7 @@ func workloadQuery() *graphql.Object {
 		Fields: graphql.Fields{
 			"getWorkload": &graphql.Field{
 				Type:        graphql.NewList(workloadType),
-				Description: "Get member information",
+				Description: "Get workload information",
 				Resolve:     services.GetWorkloads,
 				Args: graphql.FieldConfigArgument{
 					"id": &graphql.ArgumentConfig{
@@ -41,10 +41,6 @@ func workloadQuery() *graphql.Object {
 					"title": &graphql.ArgumentConfig{
 						Type:        graphql.String,
 						Description: "Title",
-					},
-					"workload_type": &graphql.ArgumentConfig{
-						Type:        graphql.String,
-						Description: "Workload Type",
 					},
 				},
 			},
@@ -66,10 +62,6 @@ func workloadMutation() *graphql.Object {
 					"title": &graphql.ArgumentConfig{
 						Type:        graphql.NewNonNull(graphql.String),
 						Description: "Workload title",
-					},
-					"workload_type": &graphql.ArgumentConfig{
-						Type:        graphql.String,
-						Description: "Workload type",
 					},
 				},
 				Resolve: services.SaveOrCreateWorkload,

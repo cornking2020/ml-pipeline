@@ -1,7 +1,6 @@
 package schemas
 
 import (
-	"github.com/cornking2020/ml-pipeline/server/middleware"
 	"github.com/graphql-go/graphql"
 )
 
@@ -25,7 +24,7 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 		"workload": &graphql.Field{
 			Type:        workloadQuery(),
 			Description: "Query for workload",
-			Resolve:     middleware.TokenCheck,
+			//Resolve:     middleware.TokenCheck,
 		},
 	},
 })

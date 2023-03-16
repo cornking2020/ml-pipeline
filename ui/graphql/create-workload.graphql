@@ -1,0 +1,11 @@
+mutation createWorkload($id: Int, $title: String!) {
+    workload {
+        saveOrCreateWorkload(
+            id: $id
+            title: $title
+        ) {
+            id
+            title
+        }
+    }
+}

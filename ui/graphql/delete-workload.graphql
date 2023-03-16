@@ -1,0 +1,7 @@
+mutation deleteWorkload($id: Int!) {
+    workload {
+        deleteWorkload(id: $id) {
+            id
+        }
+    }
+}

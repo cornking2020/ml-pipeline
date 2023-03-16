@@ -1,0 +1,62 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type JWT {
+    makeToken(code: String!): accessToken
+}
+
+"RootMutation"
+type Mutation {
+    "Authorization"
+    auth: JWT
+    "Workload"
+    workload: WorkloadMutation
+}
+
+"RootQuery"
+type Query {
+    "Query for workload"
+    workload: WorkloadQuery
+}
+
+"Workload information"
+type Workload {
+    "Workload ID"
+    id: Int
+    "Workload Title"
+    title: String!
+    "Workload Type"
+    workload_type: String!
+}
+
+type WorkloadMutation {
+    deleteWorkload(
+        "Query Id"
+        id: Int!
+    ): Workload
+    saveOrCreateWorkload(
+        "Query Id"
+        id: Int,
+        "Workload title"
+        title: String!
+    ): Workload
+}
+
+"Query for workload"
+type WorkloadQuery {
+    "Get workload information"
+    getWorkload(
+        "Query Id"
+        id: Int,
+        "Title"
+        title: String
+    ): [Workload]
+}
+
+type accessToken {
+    value: String!
+}

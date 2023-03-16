@@ -1,0 +1,8 @@
+query getWorkloads($id: Int, $title: String) {
+    workload {
+        getWorkload(id: $id, title: $title) {
+            id
+            title
+        }
+    }
+}
